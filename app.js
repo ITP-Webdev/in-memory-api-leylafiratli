@@ -22,15 +22,15 @@ const db = {
       body: 'something else here...'
     }
   ],
-  comments: []
+  comments: ['comment1', 'comment2']
 };
 
 app.get('/api/posts', (request, response) => {
   response.json(db.posts);
 });
 
-app.get("/api/db", (request,response) => {
-  response.json(db);
+app.get("/api/comments", (request,response) => {
+  response.json(db.comments);
 });
 
 app.post('/api/posts', (request, response) => {
@@ -40,30 +40,11 @@ app.post('/api/posts', (request, response) => {
   response.json(post);
 });
 
-app.post("/api/comments", (request,response) => {
+app.post('/api/comments', (request,response) => {
   const comment = request.body;
-  if(comment.post == false){
-    response.status(400).send({
-      errors: {
-        post: "Post is required for comments"
-      }
-    });
-  } else {
-    const post = db.posts.find(post => {
-      return post.id === comment.post;
-    });
-  if(post){
-    comment.id = db.comments.length+1;
-    db.comments.push(comment);
-    response.json(comment);
-  } if (!post){
-    response.status(404).send({
-      errors: {
-        post: "Post doesn't exist"
-      }
-    });
-    }
-  }
+  comment.id = db.comments.length+1;
+  db.comments.push(comment);
+  response.json(comment);
 });
 
 app.get('/api/posts/:id', (request, response) => {
