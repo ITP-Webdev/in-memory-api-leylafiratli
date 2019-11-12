@@ -85,7 +85,6 @@ app.get("/api/posts/:id/comments", (request, response) => {
   db.comments.find(comment => {
     if (comment.post === postid) {
       comments.push(comment);
-      response.status.(204).send();
     }
     else {
       response.status.(404).send();
