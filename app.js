@@ -100,12 +100,12 @@ app.delete('/api/posts/:id', (request, response) => {
 
 app.delete("/api/comments/:id", (request, response) => {
   const commentid = Number(request.params.id);
-  const comment = db.comments.find(comment => {
+  const comment = db.comments.find((comment) => {
     return comment.id === commentid;
   });
 
   if (comment) {
-    db.comments = db.comments.filter(comment => {
+    db.comments = db.comments.filter((comment) => {
       return comment.id !== commentid;
     });
     response.status(204).send();
@@ -130,7 +130,7 @@ app.put('/api/posts/:id', (request, response) => {
 
 app.put("/api/comments/:id", (request, response) => {
   const commentid = Number(request.params.id);
-  const comment = db.comments.find(comment => {
+  const comment = db.comments.find((comment) => {
     return comment.id === commentid;
   });
   if (comment) {
@@ -140,6 +140,5 @@ app.put("/api/comments/:id", (request, response) => {
     response.status(404).send();
   }
 });
-
 
 app.listen(process.env.PORT || 8000);
