@@ -22,7 +22,18 @@ const db = {
       body: 'something else here...'
     }
   ],
-  comments: ['comment1', 'comment2']
+  comments: [
+    {
+      id: 1,
+      post:1,
+      body: 'comment here'
+    },
+    {
+      id:2,
+      post:2,
+      body: 'comment here'
+    }
+  ]
 };
 
 app.get('/api/posts', (request, response) => {
@@ -52,7 +63,6 @@ app.get('/api/posts/:id', (request, response) => {
   const post = db.posts.find((post) => {
     return post.id === id;
   });
-
   if (post) {
     response.json(post);
   } else {
